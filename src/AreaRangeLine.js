@@ -1,5 +1,5 @@
 import Highcharts from 'highcharts/highstock';
-import highchartsMore from 'highcharts/highcharts-more';
+import 'highcharts/highcharts-more';
 import HighchartsReact from 'highcharts-react-official';
 
 const ranges = [
