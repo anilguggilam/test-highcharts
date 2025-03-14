@@ -1,4 +1,4 @@
-import {useRef, useState, useCallback} from 'react';
+import {useRef, useState, useEffect, useCallback} from 'react';
 
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
@@ -59,6 +59,12 @@ export default function Chart () {
     const intervalRef = useRef();
     const [options, setOptions] = useState(globalOptions)
 
+    useEffect(() => {
+        return () => {
+            intervalRef.current && clearInterval(intervalRef.current);
+        }
+    },[])
+
     const ChartOnLoadCB = useCallback(()=>{
         intervalRef.current = setInterval(() => {
             const x = (new Date()).getTime(), // current time
@@ -74,7 +80,7 @@ export default function Chart () {
                 };
             })
         }, 1000);
-    });
+    }, [setOptions]);
 
     return <div>
       <HighchartsReact
